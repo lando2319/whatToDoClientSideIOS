@@ -19,6 +19,18 @@ class ViewController: UIViewController, FBLoginViewDelegate {
         
         self.fbLoginView.delegate = self
         self.fbLoginView.readPermissions = ["public_profile","email","user_friends"]
+    let url = NSURL(string: "http://www.divvybikes.com/stations/json/")
+    let request = NSURLRequest(URL: url!)
+        
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.currentQueue()) { response, maybeData, error in
+            if let data = maybeData {
+                let contents = NSString(data:data, encoding:NSUTF8StringEncoding)
+                println(contents)
+            } else {
+                println(error.localizedDescription)
+            }
+        }
+    
     }
 
     
@@ -51,5 +63,7 @@ class ViewController: UIViewController, FBLoginViewDelegate {
     }
 
 
+
+    
 }
 
